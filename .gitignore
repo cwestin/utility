@@ -1,0 +1,27 @@
+# ignore emacs backup files
+*~
+
+# ignore eclipse project files
+.project
+.cproject
+.metadata
+.classpath
+.settings
+
+# conmpiled source
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.obj
+*.so
+*.a
+
+# packages
+*.tar
+*.gz
+*.zip
+*.rpm
+*.jar
+*.war
