@@ -14,7 +14,8 @@
  )
 
 ; set formatting 
-(setq c-basic-offset 4)
+(setq c-default-style "linux"
+      c-basic-offset 4)
 ; see http://www.gnu.org/software/emacs/manual/html_mono/ccmode.html#Choosing-a-Style
 (setq c-default-style '((java-mode . "java") (awk-mode . "awk") (other . "bsd")))
 
