@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# copied from http://www.linuxhelp.net/guides/iptables
+iptables -F
+iptables -F INPUT
+iptables -F OUTPUT
+iptables -F FORWARD
+iptables -F -t mangle
+iptables -F -t nat
+iptables -X
+
+iptables -P INPUT DROP
+iptables -P OUTPUT ACCEPT
+iptables -P FORWARD ACCEPT
+
+# output from iptables-save
+iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A INPUT -p icmp -j ACCEPT
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT
+
+# cwestin: allow access to web server HTTP and HTTPS
+iptables -A INPUT -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT
+iptables -A INPUT -p tcp -m state --state NEW -m tcp --dport 443 -j ACCEPT
+
+# cwestin: allow mysql replication from prime on the internal network
+#iptables -A INPUT -p tcp -m state --state NEW -m tcp --dport 3306 -s xx.xx.xx.xx -i eth1 -d xx.xx.xx.xx -j ACCEPT
+
+# output from iptables-save
+iptables -A INPUT -j REJECT --reject-with icmp-host-prohibited
+iptables -A FORWARD -j REJECT --reject-with icmp-host-prohibited
