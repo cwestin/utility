@@ -1,5 +1,16 @@
 #!/bin/sh
 
+# to get this activated on a fedora system:
+# (1) run the script:
+#  sudo ./firewall
+# (2) restart iptables
+#  sudo systemctl restart iptables.service
+#
+# after testing to make sure everything still works
+# (3) save the configuration so it will be in effect again on reboot:
+#  su -c "iptables-save > /etc/sysconfig/iptables"
+
+
 # copied from http://www.linuxhelp.net/guides/iptables
 iptables -F
 iptables -F INPUT
@@ -19,7 +30,7 @@ iptables -A INPUT -p icmp -j ACCEPT
 iptables -A INPUT -i lo -j ACCEPT
 iptables -A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT
 
-# cwestin: allow access to web server HTTP and HTTPS
+# allow access to web server HTTP and HTTPS
 #iptables -A INPUT -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT
 #iptables -A INPUT -p tcp -m state --state NEW -m tcp --dport 443 -j ACCEPT
 
@@ -40,6 +51,10 @@ iptables -A INPUT -i p2p1 -p tcp -m state --state NEW -m tcp --dport 8080 -j ACC
 
 #### mysql replication from prime on the internal network
 #iptables -A INPUT -p tcp -m state --state NEW -m tcp --dport 3306 -s xx.xx.xx.xx -i eth1 -d xx.xx.xx.xx -j ACCEPT
+
+#### postgres
+# accept from anywhere, for development purposes (use stricter source and dest in prod)
+iptables -A INPUT -p tcp -m state --state NEW -m tcp --dport 5432 -j ACCEPT
 
 # output from iptables-save
 iptables -A INPUT -j REJECT --reject-with icmp-host-prohibited
