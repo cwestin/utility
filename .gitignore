@@ -25,3 +25,6 @@
 *.rpm
 *.jar
 *.war
+
+# MacOS Desktop metadata
+.DS_Store
