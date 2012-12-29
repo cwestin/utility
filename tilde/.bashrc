@@ -1,3 +1,6 @@
+# default file protections
+umask 022
+
 # we like emacs
 export EDITOR=emacs
 
