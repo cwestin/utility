@@ -50,3 +50,10 @@
   (when (member major-mode cwestin/untabify-modes)
      (untabify (point-min) (point-max))))
 (add-hook 'before-save-hook 'cwestin/untabify-hook)
+
+; instructions for finding package archives
+; from https://class.coursera.org/proglang-2012-001/forum/thread?thread_id=34
+(require 'package)
+(add-to-list 'package-archives
+  '("marmalade" . "http://marmalade-repo.org/packages/"))
+(package-initialize)
