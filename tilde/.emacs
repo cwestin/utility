@@ -57,7 +57,7 @@
 
 ; instructions for finding package archives
 ; from https://class.coursera.org/proglang-2012-001/forum/thread?thread_id=34
-(require 'package)
-(add-to-list 'package-archives
-  '("marmalade" . "http://marmalade-repo.org/packages/"))
-(package-initialize)
+; (require 'package)
+; (add-to-list 'package-archives
+;   '("marmalade" . "http://marmalade-repo.org/packages/"))
+; (package-initialize)
