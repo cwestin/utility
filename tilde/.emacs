@@ -13,6 +13,10 @@
   ;; If there is more than one, they won't work right.
  )
 
+; handle external file changes
+; see http://stackoverflow.com/questions/1480572/how-to-have-emacs-auto-refresh-all-buffers-when-files-have-changed-on-disk
+(global-auto-revert-mode t)
+
 ; see http://www.emacswiki.org/emacs/CcMode#toc7
 (add-to-list `auto-mode-alist `("\\.m\\'" . objc-mode))
 (add-to-list `magic-mode-alist
