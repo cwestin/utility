@@ -17,14 +17,28 @@
 ; see http://stackoverflow.com/questions/1480572/how-to-have-emacs-auto-refresh-all-buffers-when-files-have-changed-on-disk
 (global-auto-revert-mode t)
 
+; objective-c
 ; see http://www.emacswiki.org/emacs/CcMode#toc7
-(add-to-list `auto-mode-alist `("\\.m\\'" . objc-mode))
-(add-to-list `magic-mode-alist
-             `(,(lambda ()
-                  (and (string= (file-name-extension buffer-file-name) "h")
-                       (re-search-forward "@\\<interface\\>"
-                                          magic-mode-regexp-match-limit t)))
-               . objc-mode))
+; (add-to-list `auto-mode-alist `("\\.m\\'" . objc-mode))
+; (add-to-list `magic-mode-alist
+;             `(,(lambda ()
+;                  (and (string= (file-name-extension buffer-file-name) "h")
+;                       (re-search-forward "@\\<interface\\>"
+;                                          magic-mode-regexp-match-limit t)))
+;               . objc-mode))
+
+; octave
+; see http://www.gnu.org/software/octave/doc/interpreter/Using-Octave-Mode.html
+(autoload 'octave-mode "octave-mod" nil t)
+          (setq auto-mode-alist
+                (cons '("\\.m$" . octave-mode) auto-mode-alist))
+
+(add-hook 'octave-mode-hook
+                    (lambda ()
+                      (abbrev-mode 1)
+                      (auto-fill-mode 1)
+                      (if (eq window-system 'x)
+                          (font-lock-mode 1))))
 
 ; set formatting 
 (setq c-default-style "linux"
@@ -54,6 +68,8 @@
   (when (member major-mode cwestin/untabify-modes)
      (untabify (point-min) (point-max))))
 (add-hook 'before-save-hook 'cwestin/untabify-hook)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 
 ; instructions for finding package archives
 ; from https://class.coursera.org/proglang-2012-001/forum/thread?thread_id=34
