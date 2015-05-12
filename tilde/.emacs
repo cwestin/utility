@@ -3,9 +3,16 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(scroll-bar-mode nil)
- '(tool-bar-mode nil)
- '(tooltip-mode nil))
+  '(scroll-bar-mode nil)
+  '(tool-bar-mode nil)
+  '(tooltip-mode nil)
+
+  ;; don't pop up the warning about discarding very large amounts of buffer undo
+  ;; see https://groups.google.com/forum/#!topic/gnu.emacs.help/k1lot9HBh40
+  '(warning-suppress-types (quote ((undo discard-info))))
+  )
+
+
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
@@ -40,7 +47,7 @@
                       (if (eq window-system 'x)
                           (font-lock-mode 1))))
 
-; set formatting 
+; set formatting
 (setq c-default-style "linux"
       c-basic-offset 4)
 ; see http://www.gnu.org/software/emacs/manual/html_mono/ccmode.html#Choosing-a-Style
@@ -48,7 +55,7 @@
 
 ; remove tabs from source code
 ; from http://stackoverflow.com/questions/3313210/converting-this-untabify-on-save-hook-for-emacs-to-work-with-espresso-mode-or-a
-(setq cwestin/untabify-modes 
+(setq cwestin/untabify-modes
   '(c-mode
     c++-mode
     objc-mode
