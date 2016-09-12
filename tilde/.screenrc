@@ -1,0 +1,3 @@
+# remap ctrl-a to ctrl-\ for emacs' sake
+# http://unix.stackexchange.com/questions/12455/working-with-screen-and-emacs
+escape ^\\\
